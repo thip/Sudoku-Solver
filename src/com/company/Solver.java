@@ -10,7 +10,7 @@ import java.util.LinkedList;
 class Solver {
 
     private Board board;
-    private int valuesSet = 0;
+
     private final LinkedList<Cell> visitedByPairsInRow = new LinkedList<Cell>();
     private final LinkedList<Cell> visitedByPairsInColumn = new LinkedList<Cell>();
 
@@ -21,8 +21,8 @@ class Solver {
 
         for (int i = 0; i < 100; i++) {
 
-            //XWingSolver xWing = new XWingSolver();  //order does something funny here
-            //xWing.solve(board);
+
+
 
             hiddenSingles();
             nakedSingles();
@@ -37,7 +37,6 @@ class Solver {
         }
 
         System.out.println(board.toString());
-        System.out.println(valuesSet);
     }
 
     void blockingPairsInRow() {
@@ -54,7 +53,7 @@ class Solver {
                         if (!visitedByPairsInRow.contains(cellFromSameRow) && cellFromSameRow.getCandidates().equals(cell.getCandidates())) {
                             visitedByPairsInRow.add(cellFromSameRow);
                             sameRow.remove(cellFromSameRow);
-                            System.out.println("pair in row");
+
 
 
 
@@ -91,7 +90,7 @@ class Solver {
                 for (Cell conflictingCell : conflictingCells) {
                     conflictingCell.getCandidates().remove(newValue);
                 }
-                valuesSet++;  //debug line
+
             }
         }
     }
@@ -107,7 +106,7 @@ class Solver {
                     for (Cell cellFromSameColumn : sameColumn) {
                         if (!visitedByPairsInColumn.contains(cellFromSameColumn) && cellFromSameColumn.getCandidates().equals(cell.getCandidates())) {
                             sameColumn.remove(cellFromSameColumn);
-                            System.out.println("pair in column");
+
                             for (Cell blockedCell : sameColumn) {
                                 blockedCell.getCandidates().removeAll(cell.getCandidates()); //naively assume nothing only has one of these as a candidate
                             }
@@ -141,7 +140,7 @@ class Solver {
 
                 cell.getCandidates().removeAll(takenValues);
 
-                //System.out.println(cell.getX()+ "," + cell.getY() + ":" +cell.getCandidates());
+
 
                 setCellValues();
             }
@@ -157,7 +156,7 @@ class Solver {
 
 
 
-                // System.out.println(cell.getX()+ "," + cell.getY() + ":" +cell.getCandidates());     // debug line
+
 
                 HashSet<Value> mentionedValues = new HashSet<Value>();
 
@@ -172,8 +171,6 @@ class Solver {
                     cell.getCandidates().removeAll(mentionedValues);
                 }
 
-                //System.out.println(mentionedValues);   //debug line
-                //System.out.println(cell.getX()+ "," + cell.getY() + ":" +unmentionedValues);   //debug line
 
 
                 setCellValues();
@@ -190,7 +187,6 @@ class Solver {
 
 
 
-                // System.out.println(cell.getX()+ "," + cell.getY() + ":" +cell.getCandidates());     // debug line
 
                 HashSet<Value> mentionedValues = new HashSet<Value>();
 
@@ -205,8 +201,6 @@ class Solver {
                     cell.getCandidates().removeAll(mentionedValues);
                 }
 
-                //System.out.println(mentionedValues);   //debug line
-                //System.out.println(cell.getX()+ "," + cell.getY() + ":" +unmentionedValues);   //debug line
 
 
                 setCellValues();
@@ -223,7 +217,6 @@ class Solver {
 
 
 
-                // System.out.println(cell.getX()+ "," + cell.getY() + ":" +cell.getCandidates());     // debug line
 
                 HashSet<Value> mentionedValues = new HashSet<Value>();
 
@@ -237,9 +230,6 @@ class Solver {
                 if (!mentionedValues.containsAll(cell.getCandidates())){
                     cell.getCandidates().removeAll(mentionedValues);
                 }
-
-                //System.out.println(mentionedValues);   //debug line
-                //System.out.println(cell.getX()+ "," + cell.getY() + ":" +unmentionedValues);   //debug line
 
 
                 setCellValues();
@@ -364,103 +354,3 @@ class Solver {
 
 }
 
-/*class XWingSolver
-{
-    HashSet<Cell> cellsAffected = new HashSet<Cell>();
-    HashSet<Cell> cellsOfInterest = new HashSet<Cell>();
-    Cell lastFound = null;  //think about stacks for this?
-    Cell lastlastFound = null;  //think about stacks for this?
-
-    int depth = 0;
-
-
-    public boolean recurse(Cell cell, boolean column)
-    {
-        LinkedList<Cell> potentialMatches;
-        LinkedList<Cell> justSeen = new LinkedList<Cell>();
-
-        //depth++;
-        //System.out.println(depth);
-
-        if (column){
-             potentialMatches = cell.getCellsInSameColumn();
-        } else {
-             potentialMatches = cell.getCellsInSameRow();
-        }
-
-        for (Cell potentialMatch : potentialMatches)
-        {
-            if (cellsOfInterest.contains(potentialMatch) && !justSeen.contains(potentialMatch))
-            {
-                return true;
-            } else {
-
-                if ( potentialMatch.getCandidates().equals(cell.getCandidates()) )
-                {
-                   // System.out.println("sniff");
-                    cellsOfInterest.add(potentialMatch);
-                    justSeen.add(potentialMatch);
-
-
-                    cellsAffected.addAll(potentialMatch.getCellsInSameColumn());
-                    cellsAffected.addAll(potentialMatch.getCellsInSameRow());
-
-                    recurse(potentialMatch, !column);
-                }
-
-            }
-
-        }
-
-        //depth--;
-        //System.out.println(depth);
-        return false;
-
-    }
-
-    public boolean recurse(LinkedList<Cell> cells)
-    {
-        for (Cell cell : cells)
-        {
-
-            if (cell.getCandidates().size() == 2)
-            {
-                if (recurse(cell, true) || recurse(cell, false)){
-
-                    System.out.println("something exciting");
-
-                    cellsAffected.removeAll(cellsOfInterest);
-
-                    Cell anInterestingCell = (Cell)cellsOfInterest.toArray()[0];
-                    HashSet<Value> thePair = anInterestingCell.getCandidates();
-
-                    for (Cell affectedCell : cellsAffected)
-                    {
-                        affectedCell.getCandidates().removeAll(thePair);
-                        HashSet<Value> lol = affectedCell.getCandidates(); //debug line
-                    }
-
-                    return true;
-                }
-
-            }
-        }
-        return false;
-    }
-
-    public void solve(Board board)
-    {
-        if ( recurse(board.getCellList())){
-
-            for (Cell cell : board.getCellList())
-            {
-                if ((cell.getValue() == Value.EMPTY) && (cell.getCandidates().size() == 1))
-                {
-                    cell.setValue((Value)cell.getCandidates().toArray()[0]);
-                    System.out.println("BOOOOOOOOOM");
-                }
-            }
-        }
-    }
-
-}  */

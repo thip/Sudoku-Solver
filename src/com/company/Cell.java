@@ -42,10 +42,6 @@ class Cell {
     private LinkedList<Cell> cellsInBox;
 
 
-    //private LinkedList<Cell> cellRowInBox;
-    //private LinkedList<Cell> cellColumnInBox;
-    //private LinkedList<Cell> cellsinBoxRow;
-    //private LinkedList<Cell> cellsInBoxCollumn;
 
     public Cell(int x, int y, Value value) {
 
@@ -122,9 +118,7 @@ class Cell {
         this.cellsInBox = cellsInBox;
     }
 
-    public void setCandidates(HashSet<Value> candidates) {
-        this.candidates = candidates;
-    }
+
 
     public void clearCandidates() {
         this.candidates = new HashSet<Value>();

@@ -36,7 +36,7 @@ public class BoardView extends Application {
     public void start(Stage stage) throws Exception {
 
         File file = new File("problems/web.sud");
-        String content = new Scanner(file).useDelimiter("\\Z").next()
+        String content = new Scanner(file).useDelimiter("\\Z").next();
 
         try {
             content = new Scanner(file).useDelimiter("\\Z").next();
@@ -69,8 +69,8 @@ public class BoardView extends Application {
 
 
 
-        int boxWidth = (int)Math.abs(boardSize /3);
-        int cellWidth = (int)Math.abs(boardSize /9);
+        int boxWidth = Math.abs(boardSize /3);
+        int cellWidth = Math.abs(boardSize /9);
         int boxLineThickness = 4;
 
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());

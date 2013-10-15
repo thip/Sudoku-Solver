@@ -20,10 +20,7 @@ class Box {
         cells = new Cell[3][3];
     }
 
-    int x, y;
 
-    LinkedList<Box> row;
-    LinkedList<Box> column;
 
     public void setCell(int cellX, int cellY, Cell cell) {
 

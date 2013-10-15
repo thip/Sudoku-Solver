@@ -129,7 +129,7 @@ class Board {
 
 
 
-    //Crazy assed knitting begins
+    //Crazy knitting begins
     public Board( String s )
     {
         cells = new Cell[9][9];
