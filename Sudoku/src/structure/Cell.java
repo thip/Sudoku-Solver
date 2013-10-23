@@ -1,4 +1,4 @@
-package com.company;
+package structure;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -7,7 +7,7 @@ import java.util.LinkedList;
 /**
  * @author David Capper <dmc2@aber.ac.uk>
  */
-class Cell {
+public class Cell {
 
     /**
      * Stores the value of the cell.
@@ -118,7 +118,9 @@ class Cell {
         this.cellsInBox = cellsInBox;
     }
 
-
+    public boolean hasCandidate(Value candidate){
+        return candidates.contains(candidate);
+    }
 
     public void clearCandidates() {
         this.candidates = new HashSet<Value>();

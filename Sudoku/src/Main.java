@@ -1,4 +1,5 @@
-package com.company;
+import solver.Solver;
+import structure.Board;
 
 import java.io.File;
 import java.util.Scanner;
@@ -10,8 +11,8 @@ public class Main {
         String content = new Scanner(file).useDelimiter("\\Z").next();
         Board board = new Board(content);
 
-        Solver solver = new Solver();
-        solver.Solve(board);
+        Solver solver = new Solver(board);
+        solver.solveStep();
 
 
     }
