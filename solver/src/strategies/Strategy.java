@@ -12,10 +12,19 @@ import java.util.LinkedList;
 public abstract class Strategy {
     Board board;
 
+
+
     protected Strategy(Board board)
     {
         this.board = board;
+
     }
+
+    public boolean isStagnated() {
+        return stagnated;
+    }
+
+    boolean stagnated = false;
 
     public abstract void run();
 

@@ -5,6 +5,7 @@ import structure.Board;
 import structure.Cell;
 import structure.Value;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 
@@ -19,6 +20,7 @@ public class NakedSingles extends Strategy {
 
     @Override
     public void run() {
+        stagnated = true;
         for (Cell cell : board.getCellList()) {
             if (cell.getValue() == Value.EMPTY) {
                 LinkedList<Cell> conflictingCells = new LinkedList<Cell>();
@@ -34,7 +36,13 @@ public class NakedSingles extends Strategy {
                     if (conflictingCell.getValue() != Value.EMPTY) takenValues.add(conflictingCell.getValue());
                 }
 
-                if (!takenValues.containsAll(cell.getCandidates())) cell.getCandidates().removeAll(takenValues);
+                if (!takenValues.containsAll(cell.getCandidates())) {
+                    if (!Collections.disjoint(cell.getCandidates(), takenValues) )
+                    {
+                        cell.getCandidates().removeAll(takenValues);
+                        stagnated = false;
+                    }
+                }
 
 
                 setCellValues();

@@ -4,10 +4,15 @@ import structure.Board;
 import structure.Cell;
 import structure.Value;
 
+import java.util.Collections;
 import java.util.LinkedList;
 
 /**
+ * This Strategy looks for pairs of cells which have the same pair of candidates in the same row or column.
+ * When we find pairs of cells like this we can remove their candidates from the other cells in the same row or column
+ *
  * @author David Capper <dmc2@aber.ac.uk>
+ * @see Strategy
  */
 public class BlockingPairs extends Strategy {
 
@@ -20,11 +25,13 @@ public class BlockingPairs extends Strategy {
 
     @Override
     public void run() {
+        stagnated = true;
         blockingPairsInRow();
         blockingPairsInColumn();
     }
 
     void blockingPairsInRow() {
+
 
 
         for (Cell cell : board.getCellList()) {
@@ -39,8 +46,13 @@ public class BlockingPairs extends Strategy {
                             sameRow.remove(cellFromSameRow);
 
 
+
                             for (Cell blockedCell : sameRow) {
-                                blockedCell.getCandidates().removeAll(cell.getCandidates()); //naively assume nothing only has one of these as a candidate
+                                if (!Collections.disjoint(blockedCell.getCandidates(), cell.getCandidates())){
+                                    blockedCell.getCandidates().removeAll(cell.getCandidates()); //naively assume nothing only has one of these as a candidate
+
+                                    stagnated = false;
+                                }
                             }
                             setCellValues();
                             break;
@@ -67,7 +79,11 @@ public class BlockingPairs extends Strategy {
                             sameColumn.remove(cellFromSameColumn);
 
                             for (Cell blockedCell : sameColumn) {
-                                blockedCell.getCandidates().removeAll(cell.getCandidates()); //naively assume nothing only has one of these as a candidate
+                                if (!Collections.disjoint(blockedCell.getCandidates(), cell.getCandidates())){
+                                    blockedCell.getCandidates().removeAll(cell.getCandidates()); //naively assume nothing only has one of these as a candidate
+
+                                    stagnated = false;
+                                }
                             }
                             setCellValues();
                             break;

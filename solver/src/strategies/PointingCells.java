@@ -18,6 +18,7 @@ public class PointingCells extends Strategy {
 
     @Override
     public void run() {
+        stagnated = true;
         pointingCellsInColumns();
         pointingCellsInRows();
     }
@@ -55,8 +56,9 @@ public class PointingCells extends Strategy {
                 for (Value candidate : candidatesInColumnAndBox) {
                     if (Collections.frequency(candidatesInColumnAndBox, candidate) > 1) {
                         for (Cell blockedCell : cellsInColumnNotBox) {
-                            if (blockedCell.getValue().equals(Value.EMPTY)) {
+                            if (blockedCell.getValue().equals(Value.EMPTY) && blockedCell.getCandidates().contains(candidate)) {
                                 blockedCell.getCandidates().remove(candidate);
+                                stagnated = false;
                             }
 
                         }
@@ -104,8 +106,9 @@ public class PointingCells extends Strategy {
                 for (Value candidate : candidatesInRowAndBox) {
                     if (Collections.frequency(candidatesInRowAndBox, candidate) > 1) {
                         for (Cell blockedCell : cellsInRowNotBox) {
-                            if (blockedCell.getValue().equals(Value.EMPTY)) {
+                            if (blockedCell.getValue().equals(Value.EMPTY) && blockedCell.getCandidates().contains(candidate)) {
                                 blockedCell.getCandidates().remove(candidate);
+                                stagnated = false;
                             }
 
                         }

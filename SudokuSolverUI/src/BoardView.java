@@ -35,7 +35,7 @@ public class BoardView extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        File file = new File("problems/book67.sud");
+        File file = new File("problems/web.sud");
         String content = new Scanner(file).useDelimiter("\\Z").next();
 
         try {
@@ -55,7 +55,7 @@ public class BoardView extends Application {
 
 
         draw(gc);
-
+        /*********************************/
         Solver solverThing = new Solver(board);
 
         int n = 0;
@@ -64,6 +64,16 @@ public class BoardView extends Application {
             if (!solverThing.solveStep()) break;
             n++ ;
         }
+        /*********************************
+        Solver_thing solverThing = new Solver_thing(board);
+
+        int n = 0;
+
+        while (!board.isSolved() && n < 100 ){
+            solverThing.solveStep();
+            n++ ;
+        }
+        /*********************************/
 
         if (board.isSolved()) {
             System.out.println("Board solved in " + n + " steps.");

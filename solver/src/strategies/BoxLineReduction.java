@@ -18,11 +18,13 @@ public class BoxLineReduction extends Strategy {
 
     @Override
     public void run() {
+        stagnated = true;
         boxLineReduction(board.getColumns());
         boxLineReduction(board.getRows());
     }
 
     void boxLineReduction(LinkedList<Line> lines) {
+
 
 
         for (Line line : lines) {
@@ -36,8 +38,15 @@ public class BoxLineReduction extends Strategy {
                         markedCells.removeAll(possiblePartners);
 
 
+
                         for (Cell cell : markedCells) {
-                            cell.getCandidates().remove(candidate);
+
+                            if (cell.getCandidates().contains(candidate))
+                            {
+                                cell.getCandidates().remove(candidate);
+                                stagnated = false;
+                            }
+
                         }
                     }
                 }

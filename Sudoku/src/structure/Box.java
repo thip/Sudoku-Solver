@@ -5,7 +5,7 @@ import java.util.LinkedList;
 /**
  * @author David Capper <dmc2@aber.ac.uk>
  */
-class Box extends Structure{
+public class Box extends Structure{
 
 
 

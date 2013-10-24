@@ -4,6 +4,7 @@ import structure.Board;
 import structure.Cell;
 import structure.Value;
 
+import java.util.Collections;
 import java.util.HashSet;
 
 /**
@@ -17,6 +18,7 @@ public class HiddenSingles extends Strategy {
 
     @Override
     public void run() {
+        stagnated = true;
         hiddenBoxSingle();
         hiddenRowSingle();
         hiddenColumnSingle();
@@ -32,11 +34,18 @@ public class HiddenSingles extends Strategy {
                 for (Cell conflictingCell : cell.getCellsInSameBox()) {
                     if (conflictingCell.getValue().equals(Value.EMPTY))
                         mentionedValues.addAll(conflictingCell.getCandidates());
+
                 }
 
 
                 if (!mentionedValues.containsAll(cell.getCandidates())) {
-                    cell.getCandidates().removeAll(mentionedValues);
+
+                    if (!Collections.disjoint(cell.getCandidates(), mentionedValues))
+                    {
+                        cell.getCandidates().removeAll(mentionedValues);
+                        stagnated = false;
+                    }
+
                 }
 
 
@@ -59,7 +68,12 @@ public class HiddenSingles extends Strategy {
 
 
                 if (!mentionedValues.containsAll(cell.getCandidates())) {
-                    cell.getCandidates().removeAll(mentionedValues);
+                    if (!Collections.disjoint(cell.getCandidates(), mentionedValues))
+                    {
+                        cell.getCandidates().removeAll(mentionedValues);
+                        stagnated = false;
+                    }
+
                 }
 
 
@@ -82,7 +96,11 @@ public class HiddenSingles extends Strategy {
 
 
                 if (!mentionedValues.containsAll(cell.getCandidates())) {
-                    cell.getCandidates().removeAll(mentionedValues);
+                    if (!Collections.disjoint(cell.getCandidates(), mentionedValues))
+                    {
+                        cell.getCandidates().removeAll(mentionedValues);
+                        stagnated = false;
+                    }
                 }
 
 

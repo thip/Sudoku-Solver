@@ -125,4 +125,19 @@ public class Cell {
     public void clearCandidates() {
         this.candidates = new HashSet<Value>();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+        {
+            return false;
+        }
+
+        if (this.getClass() != obj.getClass())
+        {
+            return false;
+        }
+
+        return (this.value == ((Cell)obj).getValue()) && (this.candidates == ((Cell) obj).getCandidates());
+    }
 }

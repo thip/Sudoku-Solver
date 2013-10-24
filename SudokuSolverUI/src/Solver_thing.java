@@ -29,6 +29,8 @@ public class Solver_thing {
         boxColumnAndRowReduction();
 
 
+
+
         //}
 
         //System.out.println(board.toString());
