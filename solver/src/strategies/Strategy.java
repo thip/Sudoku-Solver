@@ -10,11 +10,11 @@ import java.util.LinkedList;
  * @author David Capper <dmc2@aber.ac.uk>
  */
 public abstract class Strategy {
-    Board board;
+    final Board board;
 
+    //LinkedList<String> activityLog;
 
-
-    protected Strategy(Board board)
+    Strategy(Board board)
     {
         this.board = board;
 
@@ -28,7 +28,7 @@ public abstract class Strategy {
 
     public abstract void run();
 
-    protected void setCellValues() {
+    public void setCellValues() {
         for (Cell cell : board.getCellList()) {
 
             LinkedList<Cell> conflictingCells = new LinkedList<Cell>();
@@ -50,6 +50,20 @@ public abstract class Strategy {
             }
         }
     }
+
+   /* protected void clearActivityLog()
+    {
+        activityLog = new LinkedList<String>();
+    }
+
+    void log(String string){
+        activityLog.add(string);
+    }
+
+    public LinkedList<String> getActivityLog()
+    {
+        return activityLog;
+    } */
 
 
 }

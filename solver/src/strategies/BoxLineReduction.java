@@ -19,6 +19,7 @@ public class BoxLineReduction extends Strategy {
     @Override
     public void run() {
         stagnated = true;
+        //clearActivityLog();
         boxLineReduction(board.getColumns());
         boxLineReduction(board.getRows());
     }

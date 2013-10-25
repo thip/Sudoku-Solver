@@ -14,7 +14,7 @@ import java.util.LinkedList;
  */
 public class HiddenPairs2 extends Strategy {
 
-    HashSet<Cell> solvedCells = new HashSet<Cell>();
+    private final HashSet<Cell> solvedCells = new HashSet<Cell>();
 
     public HiddenPairs2(Board board) {
         super(board);
@@ -23,6 +23,8 @@ public class HiddenPairs2 extends Strategy {
     @Override
     public void run() {
         stagnated = true;
+
+        //clearActivityLog();
 
         for (Line row : board.getRows()) {
             hiddenPairsInStructure(row);
@@ -40,6 +42,8 @@ public class HiddenPairs2 extends Strategy {
     void hiddenPairsInStructure(Structure structure) {
 
         stagnated = true;
+
+       // clearActivityLog();
 
         for (Cell cell : structure.getCellList()) {
 
@@ -80,7 +84,7 @@ public class HiddenPairs2 extends Strategy {
                                              }
                                         }
 
-                                        if (match == true)
+                                        if (match)
                                         {
                                             cell.getCandidates().retainAll(possibleCombination);
                                             otherCell.getCandidates().retainAll(possibleCombination);
@@ -88,7 +92,8 @@ public class HiddenPairs2 extends Strategy {
                                             solvedCells.add(cell);
                                             solvedCells.add(otherCell);
 
-                                            System.out.println("setting " + cell.getX() + "," + cell.getY() + " and " + otherCell.getX() + "," + otherCell.getY() + " to " + possibleCombination);
+                                           // System.out.println("setting " + cell.getX() + "," + cell.getY() + " and " + otherCell.getX() + "," + otherCell.getY() + " to " + possibleCombination);
+                                            //log("Hidden Pair: cells (" + (cell.getX()+1) + "," + (cell.getY()+1) + ") and (" + (otherCell.getX()+1) + "," + (otherCell.getY()+1) + ") can only have candidates, " + cell.getCandidates());
                                             stagnated = false;
                                         }
                                     }

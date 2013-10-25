@@ -19,6 +19,9 @@ public class HiddenSingles extends Strategy {
     @Override
     public void run() {
         stagnated = true;
+
+        //clearActivityLog();
+
         hiddenBoxSingle();
         hiddenRowSingle();
         hiddenColumnSingle();
@@ -43,6 +46,7 @@ public class HiddenSingles extends Strategy {
                     if (!Collections.disjoint(cell.getCandidates(), mentionedValues))
                     {
                         cell.getCandidates().removeAll(mentionedValues);
+                        //log("Hidden Single: cell (" + (cell.getX()+1) + "," + (cell.getY()+1) + ") can only have candidates, " + cell.getCandidates());
                         stagnated = false;
                     }
 
@@ -71,6 +75,7 @@ public class HiddenSingles extends Strategy {
                     if (!Collections.disjoint(cell.getCandidates(), mentionedValues))
                     {
                         cell.getCandidates().removeAll(mentionedValues);
+                        //log("Hidden Single: cell (" + (cell.getX()+1) + "," + (cell.getY()+1) + ") can only have candidates, " + cell.getCandidates());
                         stagnated = false;
                     }
 
@@ -99,6 +104,7 @@ public class HiddenSingles extends Strategy {
                     if (!Collections.disjoint(cell.getCandidates(), mentionedValues))
                     {
                         cell.getCandidates().removeAll(mentionedValues);
+                        //log("Hidden Single: cell (" + (cell.getX()+1) + "," + (cell.getY()+1) + ") can only have candidates, " + cell.getCandidates());
                         stagnated = false;
                     }
                 }

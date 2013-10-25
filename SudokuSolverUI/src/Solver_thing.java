@@ -14,7 +14,7 @@ public class Solver_thing {
 
     private final LinkedList<Cell> visitedByPairsInRow = new LinkedList<Cell>();
     private final LinkedList<Cell> visitedByPairsInColumn = new LinkedList<Cell>();
-    private Board board;
+    private final Board board;
 
     public Solver_thing(Board board) {
         this.board = board;
@@ -30,10 +30,6 @@ public class Solver_thing {
 
 
 
-
-        //}
-
-        //System.out.println(board.toString());
     }
 
     private void pointingCells() {

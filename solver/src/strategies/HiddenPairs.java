@@ -14,7 +14,7 @@ import java.util.LinkedList;
  */
 public class HiddenPairs extends Strategy {
 
-    LinkedList<Cell> alreadyVisited = new LinkedList<Cell>();
+    private final LinkedList<Cell> alreadyVisited = new LinkedList<Cell>();
 
     public HiddenPairs(Board board) {
         super(board);
@@ -23,6 +23,7 @@ public class HiddenPairs extends Strategy {
     @Override
     public void run() {
         stagnated = true;
+       // clearActivityLog();
 
         for (Line row : board.getRows()) {
             hiddenPairsInStructure(row);

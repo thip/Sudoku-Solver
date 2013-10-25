@@ -21,6 +21,9 @@ public class NakedSingles extends Strategy {
     @Override
     public void run() {
         stagnated = true;
+
+        //clearActivityLog();
+
         for (Cell cell : board.getCellList()) {
             if (cell.getValue() == Value.EMPTY) {
                 LinkedList<Cell> conflictingCells = new LinkedList<Cell>();
@@ -39,7 +42,13 @@ public class NakedSingles extends Strategy {
                 if (!takenValues.containsAll(cell.getCandidates())) {
                     if (!Collections.disjoint(cell.getCandidates(), takenValues) )
                     {
+                        HashSet<Value> candidatesToGo = new HashSet<Value>(cell.getCandidates());
+                        candidatesToGo.retainAll(takenValues);
+
                         cell.getCandidates().removeAll(takenValues);
+
+                        //log("Naked Singles: removing used candidates: " + candidatesToGo + " from cell (" + (cell.getX()+1) + "," + (cell.getY()+1) + ")");
+
                         stagnated = false;
                     }
                 }

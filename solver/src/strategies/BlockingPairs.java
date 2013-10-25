@@ -19,13 +19,18 @@ public class BlockingPairs extends Strategy {
     private final LinkedList<Cell> visitedByPairsInRow = new LinkedList<Cell>();
     private final LinkedList<Cell> visitedByPairsInColumn = new LinkedList<Cell>();
 
+
     public BlockingPairs(Board board) {
-        super(board);
-    }
+       super(board);
+ }
+
 
     @Override
     public void run() {
         stagnated = true;
+
+        //clearActivityLog();
+
         blockingPairsInRow();
         blockingPairsInColumn();
     }

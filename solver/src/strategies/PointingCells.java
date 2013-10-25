@@ -19,6 +19,9 @@ public class PointingCells extends Strategy {
     @Override
     public void run() {
         stagnated = true;
+
+       // clearActivityLog();
+
         pointingCellsInColumns();
         pointingCellsInRows();
     }

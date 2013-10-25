@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<BorderPane prefHeight="454.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="UIController">
+  <bottom>
+    <ToolBar>
+      <items>
+        <Button fx:id="buttonSolve" disable="false" mnemonicParsing="false" onAction="#handleSolve" text="Solve" underline="false" />
+        <Button fx:id="buttonSolveStep" mnemonicParsing="false" onAction="#handleSolveStep" text="Solve Step" />
+      </items>
+    </ToolBar>
+  </bottom>
+  <center>
+    <Pane fx:id="boardPain" prefHeight="200.0" prefWidth="200.0" />
+  </center>
+  <top>
+    <MenuBar>
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#handleOpenFile" text="Open" fx:id="fileOpen" />
+            <MenuItem mnemonicParsing="false" onAction="#handleQuit" text="Quit" fx:id="fileQuit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About" fx:id="helpAbout" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+  </top>
+</BorderPane>

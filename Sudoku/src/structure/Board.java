@@ -104,7 +104,7 @@ public class Board extends Structure{
                 Cell cell = new Cell(   xPosition,  //  Pass the cell
                                         yPosition,  //  it's position.
 
-                                        //and give alue, converted from the current character in the line.
+                                        //and give value, converted from the current character in the line.
                                         Value.characterToValue(lines[yPosition].charAt(xPosition))
                                     );
 
